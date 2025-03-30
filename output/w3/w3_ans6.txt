@@ -1,0 +1,31 @@
+import numpy as np
+
+def cosine_similarity(vec1, vec2):
+    """Compute the cosine similarity between two vectors."""
+    dot_product = np.dot(vec1, vec2)
+    norm_vec1 = np.linalg.norm(vec1)
+    norm_vec2 = np.linalg.norm(vec2)
+    return dot_product / (norm_vec1 * norm_vec2)
+
+
+def most_similar(embeddings):
+    phrases = list(embeddings.keys())
+    max_similarity = -1  # Initialize to a very low value
+    most_similar_pair = None
+
+    # Iterate over all pairs of phrases
+    for i in range(len(phrases)):
+        for j in range(i + 1, len(phrases)):
+            phrase1 = phrases[i]
+            phrase2 = phrases[j]
+            embedding1 = embeddings[phrase1]
+            embedding2 = embeddings[phrase2]
+
+            similarity = cosine_similarity(embedding1, embedding2)
+
+            # Update the most similar pair if necessary
+            if similarity > max_similarity:
+                max_similarity = similarity
+                most_similar_pair = (phrase1, phrase2)
+
+    return most_similar_pair

@@ -1,0 +1,55 @@
+Version:          Code 1.98.2 (ddc367ed5c8936efe395cffeec279b04ffd7db78, 2025-03-12T13:32:45.399Z)
+OS Version:       Windows_NT x64 10.0.22631
+CPUs:             13th Gen Intel(R) Core(TM) i7-1370P (20 x 2189)
+Memory (System):  31.66GB (15.65GB free)
+VM:               0%
+Screen Reader:    no
+Process Argv:     --crash-reporter-id c1bac0c0-30aa-422d-916a-207dcc4189cc
+GPU Status:       2d_canvas:                              enabled
+                  canvas_oop_rasterization:               enabled_on
+                  direct_rendering_display_compositor:    disabled_off_ok
+                  gpu_compositing:                        enabled
+                  multiple_raster_threads:                enabled_on
+                  opengl:                                 enabled_on
+                  rasterization:                          enabled
+                  raw_draw:                               disabled_off_ok
+                  skia_graphite:                          disabled_off
+                  video_decode:                           enabled
+                  video_encode:                           enabled
+                  vulkan:                                 disabled_off
+                  webgl:                                  enabled
+                  webgl2:                                 enabled
+                  webgpu:                                 enabled
+                  webnn:                                  disabled_off
+
+CPU %   Mem MB     PID  Process
+    0      133    9660  code main
+    0      255     404     gpu-process
+    0      142    5124  extensionHost [2]
+    0      111    7708  fileWatcher [1]
+    0       58    9176     utility-network-service
+    0       34   12536     crashpad-handler
+    0      134   13300  shared-process
+    0      123   13484  ptyHost
+    0        8   10204       conpty-agent
+    0        7   11036       C:\Users\mature\AppData\Local\Programs\Git\bin\bash.exe --init-file "c:\Users\mature\AppData\Local\Programs\Microsoft VS Code\resources\app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+    0       13    1760         "C:\Users\mature\AppData\Local\Programs\Git\bin\..\usr\bin\bash.exe" --init-file "c:\Users\mature\AppData\Local\Programs\Microsoft VS Code\resources\app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+    0       11   17912       conpty-agent
+    0        7   19668       C:\Users\mature\AppData\Local\Programs\Git\bin\bash.exe --init-file "c:\Users\mature\AppData\Local\Programs\Microsoft VS Code\resources\app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+    0       13   12968         "C:\Users\mature\AppData\Local\Programs\Git\bin\..\usr\bin\bash.exe" --init-file "c:\Users\mature\AppData\Local\Programs\Microsoft VS Code\resources\app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+    0       11   24812       conpty-agent
+    0        7   25496       C:\Users\mature\AppData\Local\Programs\Git\bin\bash.exe --init-file "c:\Users\mature\AppData\Local\Programs\Microsoft VS Code\resources\app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+    0       13   25576         "C:\Users\mature\AppData\Local\Programs\Git\bin\..\usr\bin\bash.exe" --init-file "c:\Users\mature\AppData\Local\Programs\Microsoft VS Code\resources\app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh"
+    0      206   13960  extensionHost [1]
+    0        7   22400       c:\Users\mature\.vscode\extensions\ms-python.python-2025.2.0-win32-x64\python-env-tools\bin\pet.exe server
+    0       12    1172         C:\WINDOWS\system32\conhost.exe 0x4
+    0      410   25192       electron-nodejs (bundle.js )
+    0      194   14244  window [2] (Welcome - Visual Studio Code)
+    0      112   16216  fileWatcher [2]
+    0      268   17964  window [1] (ΓùÅ week_1.py - tds_llm_project_2 - Visual Studio Code)
+
+Workspace Stats:
+|  Window (ΓùÅ week_1.py - tds_llm_project_2 - Visual Studio Code)
+|    Folder (tds_llm_project_2): 11 files
+|      File types: py(5) pyc(5)
+|      Conf files:

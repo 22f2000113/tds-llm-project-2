@@ -1,0 +1,13 @@
+fastapi
+requests
+uvicorn
+duckdb
+numpy
+sentence-transformers
+pandas
+python-multipart
+google-auth
+google-auth-oauthlib
+tabula-py
+beautifulsoup4
+lxml

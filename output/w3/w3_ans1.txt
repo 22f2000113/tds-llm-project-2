@@ -1,0 +1,20 @@
+import httpx
+import json
+api_key = "open_api_key_text"
+
+def get_sentiments():
+  response = httpx.post(
+      "https://api.openai.com/v1/chat/completions",
+       headers={"Authorization":f"Bearer {api_key}"},
+       json ={"model":"gpt-4o-mini",
+             "messages" :[
+                 {"role":"system","content":"Analyze the sentiment of the following text and categorize it as GOOD, BAD, or NEUTRAL."},
+                 {"role":"user","content":"zF Et0X  F SrR \nl7R  9yc  kWFj\n4XFlS9aqNDk fub e4W"}
+             ]
+
+      }
+  )
+  response.raise_for_status()
+  return response.json()
+
+print(get_sentiments())
