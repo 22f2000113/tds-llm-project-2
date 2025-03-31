@@ -21,8 +21,8 @@ def W3Q6(question):
     return {"answer":read_file(file_path)}
 
 def W3Q7(question):
-    return {"answer":" http://127.0.0.1:8000/similarity"}
+    return {"answer":"http://35.226.189.115:3000/similarity"}
 
 def W3Q8(question):
-    return {"answer":" http://127.0.0.1:8000/execute"}
+    return {"answer":" http://35.226.189.115:8000/execute"}
 

@@ -1,4 +1,3 @@
-
 # /// script
 # requires-python = "==3.12"
 # dependencies = [
@@ -53,8 +52,29 @@ def init_db():
     conn, model = setup_vector_db()
 
     # Add sample documents
-    documents =['''
-            Install and run Visual Studio Code. In your Terminal (or Command Prompt), type code -s and press Enter. Copy and paste the entire output below.What is the output of code -s?''',
+    documents =[
+      '''Your Task ESPN Cricinfo has ODI batting stats for each batsman. The result is paginated across multiple pages. Count the number of ducks in page number 26. Understanding the Data Source: ESPN Cricinfo's ODI batting statistics are spread across multiple pages, each containing a table of player data. Go to page number 26. Setting Up Google Sheets: Utilize Google Sheets' IMPORTHTML function to import table data from the URL for page number 26. Data Extraction and Analysis: Pull the relevant table from the assigned page into Google Sheets. Locate the column that represents the number of ducks for each player. (It is titled "0".) Sum the values in the "0" column to determine the total number of ducks on that page. Impact By automating the extraction and analysis of cricket batting statistics, CricketPro Insights can: Enhance Analytical Efficiency: Reduce the time and effort required to manually gather and process player performance data. Provide Timely Insights: Deliver up-to-date statistical analyses that aid teams and coaches in making informed decisions. Scalability: Easily handle large volumes of data across multiple pages, ensuring comprehensive coverage of player performances. Data-Driven Strategies: Enable the development of data-driven strategies for player selection, training focus areas, and game planning. Client Satisfaction: Improve service offerings by providing accurate and insightful analytics that meet the specific needs of clients in the cricketing world. What is the total number of ducks across players on page number 26 of ESPN Cricinfo's ODI batting stats?''',
+      
+      '''Source: Utilize IMDb's advanced web search at https://www.imdb.com/search/title/ to access movie data.Filter: Filter all titles with a rating between 3 and 5.Format: For up to the first 25 titles, extract the necessary details: ID, title, year, and rating. The ID of the movie is the part of the URL after tt in the href attribute. For example, tt10078772. Organize the data into a JSON structure as follows:[  { "id": "tt1234567", "title": "Movie 1", "year": "2021", "rating": "5.8" },  { "id": "tt7654321", "title": "Movie 2", "year": "2019", "rating": "6.2" },  // ... more titles]Submit: Submit the JSON data in the text box below.''',
+      
+      '''Write a web application that exposes an API with a single query parameter: ?country=. It should fetch the Wikipedia page of the country, extracts all headings (H1 to H6), and create a Markdown outline for the country. The outline should look like this:## Contents# Vanuatu## Etymology## History### Prehistory...API Development: Choose any web framework (e.g., FastAPI) to develop the web application. Create an API endpoint (e.g., /api/outline) that accepts a country query parameter.Fetching Wikipedia Content: Find out the Wikipedia URL of the country and fetch the page's HTML.Extracting Headings: Use an HTML parsing library (e.g., BeautifulSoup, lxml) to parse the fetched Wikipedia page. Extract all headings (H1 to H6) from the page, maintaining order.Generating Markdown Outline: Convert the extracted headings into a Markdown-formatted outline. Headings should begin with #.Enabling CORS: Configure the web application to include appropriate CORS headers, allowing GET requests from any origin.What is the URL of your API endpoint?''',
+      
+      '''As part of this initiative, you are tasked with developing a system that automates the following:API Integration and Data Retrieval: Use the BBC Weather API to fetch the weather forecast for Kuwait City. Send a GET request to the locator service to obtain the city's locationId. Include necessary query parameters such as API key, locale, filters, and search term (city).Weather Data Extraction: Retrieve the weather forecast data using the obtained locationId. Send a GET request to the weather broker API endpoint with the locationId.Data Transformation: Extract the localDate and enhancedWeatherDescription from each day's forecast. Iterate through the forecasts array in the API response and map each localDate to its corresponding enhancedWeatherDescription. Create a JSON object where each key is the localDate and the value is the enhancedWeatherDescription.The output would look like this:{  "2025-01-01": "Sunny with scattered clouds",  "2025-01-02": "Partly cloudy with a chance of rain",  "2025-01-03": "Overcast skies",  // ... additional days}What is the JSON weather forecast description for Kuwait City?''',
+      
+      '''What is the minimum latitude of the bounding box of the city Chengdu in the country China on the Nominatim API?    1. API Integration: Use the Nominatim API to fetch geospatial data for a specified city within a country via a GET request to the Nominatim API with parameters for the city and country. Ensure adherence to Nominatim’s usage policies, including rate limiting and proper attribution.    2. Data Retrieval and Filtering: Parse the JSON response from the API. If multiple results are returned (e.g., multiple cities named “Springfield” in different states), filter the results based on the provided osm_id ending to select the correct city instance.    3. Parameter Extraction: Access the boundingbox attribute. Depending on whether you're looking for the minimum or maximum latitude, extract the corresponding latitude value.ImpactBy automating the extraction and processing of bounding box data, UrbanRide can:    • Optimize Routing: Enhance route planning algorithms with precise geographical boundaries, reducing delivery times and operational costs.    • Improve Fleet Allocation: Allocate vehicles more effectively across defined service zones based on accurate city extents.    • Enhance Market Analysis: Gain deeper insights into regional performance, enabling targeted marketing and service improvements.    • Scale Operations: Seamlessly integrate new cities into their service network with minimal manual intervention, ensuring consistent data quality.What is the minimum latitude of the bounding box of the city Chengdu in the country China on the Nominatim API? Value of the minimum latitude''',
+      
+      '''Your TaskSearch using the Hacker News RSS API for the latest Hacker News post mentioning Stripe and having a minimum of 81 points. What is the link that it points to?    1. Automate Data Retrieval: Utilize the HNRSS API to fetch the latest Hacker News posts. Use the URL relevant to fetching the latest posts, searching for topics and filtering by a minimum number of points.    2. Extract and Present Data: Extract the most recent <item> from this result. Get the <link> tag inside it.    3. Share the result: Type in just the URL in the answer.What is the link to the latest Hacker News post mentioning Stripe having at least 81 points?''',
+      
+      '''Using the GitHub API, find all users located in the city Paris with over 90 followers.When was the newest user's GitHub profile created?    1. API Integration and Data Retrieval: Leverage GitHub’s search endpoints to query users by location and filter them by follower count.    2. Data Processing: From the returned list of GitHub users, isolate those profiles that meet the specified criteria.    3. Sort and Format: Identify the "newest" user by comparing the created_at dates provided in the user profile data. Format the account creation date in the ISO 8601 standard (e.g., "2024-01-01T00:00:00Z").ImpactBy automating this data retrieval and filtering process, CodeConnect gains several strategic advantages:    • Targeted Recruitment: Quickly identify new, promising talent in key regions, allowing for more focused and timely recruitment campaigns.    • Competitive Intelligence: Stay updated on emerging trends within local developer communities and adjust talent acquisition strategies accordingly.    • Efficiency: Automating repetitive data collection tasks frees up time for recruiters to focus on engagement and relationship-building.    • Data-Driven Decisions: Leverage standardized and reliable data to support strategic business decisions in recruitment and market research.Enter the date (ISO 8601, e.g. "2024-01-01T00:00:00Z") when the newest user joined GitHub.''',
+
+      '''Create a scheduled GitHub action that runs daily and adds a commit to your repository. The workflow should:    • Use schedule with cron syntax to run once per day (must use specific hours/minutes, not wildcards)    • Include a step with your email 21f3002724@ds.study.iitm.ac.in in its name    • Create a commit in each run    • Be located in .github/workflows/ directoryAfter creating the workflow:    • Trigger the workflow and wait for it to complete    • Ensure it appears as the most recent action in your repository    • Verify that it creates a commit during or within 5 minutes of the workflow runEnter your repository URL (format: https://github.com/USER/REPO):''',
+
+      '''This file, q-extract-tables-from-pdf.pdf contains a table of student marks in Maths, Physics, English, Economics, and Biology.Calculate the total Physics marks of students who scored 55 or more marks in Physics in groups 19-55 (including both groups).    1. Data Extraction:: Retrieve the PDF file containing the student marks table and use PDF parsing libraries (e.g., Tabula, Camelot, or PyPDF2) to accurately extract the table data into a workable format (e.g., CSV, Excel, or a DataFrame).    2. Data Cleaning and Preparation: Convert marks to numerical data types to facilitate accurate calculations.    3. Data Filtering: Identify students who have scored marks between 55 and Physics in groups 19-55 (including both groups).    4. Calculation: Sum the marks of the filtered students to obtain the total marks for this specific cohort.By automating the extraction and analysis of student marks, EduAnalytics empowers Greenwood High School to make informed decisions swiftly. This capability enables the school to:    • Identify Performance Trends: Quickly spot areas where students excel or need additional support.    • Allocate Resources Effectively: Direct teaching resources and interventions to groups and subjects that require attention.    • Enhance Reporting Efficiency: Reduce the time and effort spent on manual data processing, allowing educators to focus more on teaching and student engagement.    • Support Data-Driven Strategies: Use accurate and timely data to shape educational strategies and improve overall student outcomes.What is the total Physics marks of students who scored 55 or more marks in Physics in groups 19-55 (including both groups)?''',
+
+      '''As part of the Documentation Transformation Project, you are a junior developer at EduDocs tasked with developing a streamlined workflow for converting PDF files to Markdown and ensuring their consistent formatting. This project is critical for supporting EduDocs' commitment to delivering high-quality, accessible educational resources to its clients.q-pdf-to-markdown.pdf has the contents of a sample document.    1. Convert the PDF to Markdown: Extract the content from the PDF file. Accurately convert the extracted content into Markdown format, preserving the structure and formatting as much as possible.    2. Format the Markdown: Use Prettier version 3.4.2 to format the converted Markdown file.    3. Submit the Formatted Markdown: Provide the final, formatted Markdown file as your submission.ImpactBy completing this exercise, you will contribute to EduDocs Inc.'s mission of providing high-quality, accessible educational resources. Automating the PDF to Markdown conversion and ensuring consistent formatting:    • Enhances Productivity: Reduces the time and effort required to prepare documentation for clients.    • Improves Quality: Ensures all documents adhere to standardized formatting, enhancing readability and professionalism.    • Supports Scalability: Enables EduDocs to handle larger volumes of documentation without compromising on quality.    • Facilitates Integration: Makes it easier to integrate Markdown-formatted documents into various digital platforms and content management systems.What is the markdown content of the PDF, formatted with prettier@3.4.2?''',
+
+
+      '''Install and run Visual Studio Code. In your Terminal (or Command Prompt), type code -s and press Enter. Copy and paste the entire output below.What is the output of code -s?''',
 
             '''Running uv run --with httpie -- https [URL] installs the Python package httpie and sends a HTTPS request to the URL.
             
@@ -450,9 +470,66 @@ def init_db():
                 Write a prompt that will get the LLM to say Yes.
             
                 As long as the LLM says the word Yes (case sensitive), you will be marked correct. Careful! If you get a correct answer, submit and don't change it. You may get a different answer next time.''',
+                '''As a data analyst at EduTrack Systems, your task is to process this text file and determine the number of unique students based on their student IDs. This deduplication is essential to:Ensure Accurate Reporting: Avoid inflated counts in enrollment and performance reports.Improve Data Quality: Clean the dataset for further analytics, such as tracking academic progress or resource allocation.Optimize Administrative Processes: Provide administrators with reliable data to support decision-making.You need to do the following:Data Extraction: Read the text file line by line. Parse each line to extract the student ID.Deduplication: Remove duplicates from the student ID list.Reporting: Count the number of unique student IDs present in the file.By accurately identifying the number of unique students, EduTrack Systems will:Enhance Data Integrity: Ensure that subsequent analyses and reports reflect the true number of individual students.Reduce Administrative Errors: Minimize the risk of misinformed decisions that can arise from duplicate entries.Streamline Resource Allocation: Provide accurate student counts for budgeting, staffing, and planning academic programs.Improve Compliance Reporting: Ensure adherence to regulatory requirements by maintaining precise student records.Download the text file with student marks q-clean-up-student-marks.txt.How many unique students are there in the file?''',
+                '''As a data analyst at GlobalRetail Insights, you are tasked with extracting meaningful insights from this dataset. Specifically, you need to:Group Mis-spelt City Names: Use phonetic clustering algorithms to group together entries that refer to the same city despite variations in spelling. For instance, cluster "Tokyo" and "Tokio" as one.Filter Sales Entries: Select all entries where:The product sold is Fish.The number of units sold is at least 13.Aggregate Sales by City: After clustering city names, group the filtered sales entries by city and calculate the total units sold for each city.By performing this analysis, GlobalRetail Insights will be able to:Improve Data Accuracy: Correct mis-spellings and inconsistencies in the dataset, leading to more reliable insights.Target Marketing Efforts: Identify high-performing regions for the specific product, enabling targeted promotional strategies.Optimize Inventory Management: Ensure that inventory allocations reflect the true demand in each region, reducing wastage and stockouts.Drive Strategic Decision-Making: Provide actionable intelligence to clients that supports strategic planning and competitive advantage in the market.How many units of Fish were sold in Chennai on transactions with at least 13 units?''',
+                '''As a data recovery analyst at ReceiptRevive Analytics, your task is to develop a program that will:Parse the Sales Data:Read the provided JSON file containing 100 rows of sales data. Despite the truncated data (specifically the missing id), you must accurately extract the sales figures from each row.Data Validation and Cleanup:Ensure that the data is properly handled even if some fields are incomplete. Since the id is missing for some entries, your focus will be solely on the sales values.Calculate Total Sales:Sum the sales values across all 100 rows to provide a single aggregate figure that represents the total sales recorded.By successfully recovering and aggregating the sales data, ReceiptRevive Analytics will enable RetailFlow Inc. to:Reconstruct Historical Sales Data: Gain insights into past sales performance even when original receipts are damaged.Inform Business Decisions: Use the recovered data to understand sales trends, adjust inventory, and plan future promotions.Enhance Data Recovery Processes: Improve methods for handling imperfect OCR data, reducing future data loss and increasing data accuracy.Build Client Trust: Demonstrate the ability to extract valuable insights from challenging datasets, thereby reinforcing client confidence in ReceiptRevive's services.Download the data from q-parse-partial-json.jsonl.What is the total sales value?''',
+                '''As a data analyst at DataSure Technologies, you have been tasked with developing a script that processes a large JSON log file and counts the number of times a specific key, represented by the placeholder Q, appears in the JSON structure. Your solution must:Parse the Large, Nested JSON: Efficiently traverse the JSON structure regardless of its complexity.Count Key Occurrences: Increment a count only when Q is used as a key in the JSON object (ignoring occurrences of Q as a value).Return the Count: Output the total number of occurrences, which will be used by the operations team to assess the prevalence of particular system events or errors.By accurately counting the occurrences of a specific key in the log files, DataSure Technologies can:Diagnose Issues: Quickly determine the frequency of error events or specific system flags that may indicate recurring problems.Prioritize Maintenance: Focus resources on addressing the most frequent issues as identified by the key count.Enhance Monitoring: Improve automated monitoring systems by correlating key occurrence data with system performance metrics.Inform Decision-Making: Provide data-driven insights that support strategic planning for system upgrades and operational improvements.Download the data from  q-extract-nested-json-keys.json.How many times does Q appear as a key?''',
+
 
         ]
-    ids=["W1Q1", "W1Q2", "W1Q3", "W1Q4", "W1Q5","W1Q6","W1Q7","W1Q8","W1Q9","W1Q10", "W1Q11", "W1Q12", "W1Q13", "W1Q14","W1Q15","W1Q16","W1Q17","W1Q18","W2Q1", "W2Q2", "W2Q3", "W2Q4", "W2Q5","W2Q6","W2Q7","W2Q8","W2Q9","W2Q10","W3Q1", "W3Q2", "W3Q3", "W3Q4", "W3Q5","W3Q6","W3Q7","W3Q8","W3Q9"]
+    ids = [
+        "W4Q1",
+        "W4Q2",
+        "W4Q3",
+        "W4Q4",
+        "W4Q5",
+        "W4Q6",
+        "W4Q7",
+        "W4Q8",
+        "W4Q9",
+        "W4Q10",
+        "W1Q1",
+        "W1Q2",
+        "W1Q3",
+        "W1Q4",
+        "W1Q5",
+        "W1Q6",
+        "W1Q7",
+        "W1Q8",
+        "W1Q9",
+        "W1Q10",
+        "W1Q11",
+        "W1Q12",
+        "W1Q13",
+        "W1Q14",
+        "W1Q15",
+        "W1Q16",
+        "W1Q17",
+        "W1Q18",
+        "W2Q1",
+        "W2Q2",
+        "W2Q3",
+        "W2Q4",
+        "W2Q5",
+        "W2Q6",
+        "W2Q7",
+        "W2Q8",
+        "W2Q9",
+        "W2Q10",
+        "W3Q1",
+        "W3Q2",
+        "W3Q3",
+        "W3Q4",
+        "W3Q5",
+        "W3Q6",
+        "W3Q7",
+        "W3Q8",
+        "W3Q9",
+        "W5Q2",
+        "W5Q5",
+        "W5Q6",
+        "W5Q7",
+    ]
     embeddings = model.encode(documents).tolist()
 
     # Insert documents and vectors
@@ -461,7 +538,6 @@ def init_db():
         VALUES (?, ?, ?)
     """, [(str(id_), text, embedding)
           for id_, text, embedding in zip(ids, documents, embeddings)])
-    
+
     return  conn, model
     # Search similar documents
-

@@ -23,6 +23,6 @@ def W2Q8(question):
     return {"answer":"https://hub.docker.com/repository/docker/22f2000113/python-flask-app/general"}
 
 def W2Q9(question):
-    return {"answer":"http://127.0.0.1:8000/api"}
+    return {"answer":"http://35.226.189.115:3000/api"}
 
 
