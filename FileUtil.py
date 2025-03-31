@@ -7,11 +7,21 @@ import os
 import subprocess
 import json
 
+
 current_dir = os.path.abspath(os.path.dirname(__file__))
-GITHUB_API_URL = 'https://api.github.com/user/repos' #'
-GITHUB_URL  = 'https://github.com/22f2000113'
+GITHUB_API_URL = 'https://api.github.com/user/repos' 
+
 GITHUB_USERNAME = "22f2000113"
 GITHUB_TOKEN = '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'
+
+GITHUB_URL  = f'https://github.com/{GITHUB_USERNAME}'
+
+def set_repo(repo_user_name):
+    GITHUB_USERNAME=repo_user_name
+    if repo_user_name == "22f2000113":
+        GITHUB_TOKEN = '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'
+    else:
+        GITHUB_TOKEN = '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'
 
 def read_file(file_path):
     print("file_path "+file_path)

@@ -1,11 +1,11 @@
-from fastapi import FastAPI,  HTTPException, File, UploadFile, Form,Query
+from fastapi import FastAPI,  HTTPException, File, UploadFile, Form,Query,Header,Request
 from typing import List
 import os
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from io import BytesIO
-from FileUtil import extract_zip_file, write_file,current_dir
+from FileUtil import extract_zip_file, write_file,current_dir,set_repo
 from QuestionDb import  init_db
 from QuestionDb import search_similar
 import requests
@@ -21,6 +21,7 @@ from bs4 import BeautifulSoup
 from fastapi.responses import PlainTextResponse
 app = FastAPI()
 
+user_name=''
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,9 +39,12 @@ def home():
     return {"message": "Welcome to Task API"}
 
 @app.post("/api",response_class=JSONResponse)
-async def run_tasks(question: str = Form(...), file: Optional[UploadFile] = File(None)):
+async def run_tasks(request: Request,question: str = Form(...), file: Optional[UploadFile] = File(None)):
     try:
-
+        print(request.headers.get("custom_header"))
+        if request.headers.get("custom_header"):
+            set_repo(request.headers.get("custom_header"))
+        
         api_que = search_similar(conn=conn,model=model,query=question)
         print(f"question is matching with {api_que}")
 
