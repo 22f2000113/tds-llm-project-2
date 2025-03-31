@@ -1,18 +1,15 @@
 import re
 
 def get_payload_request(question):
-    pattern = r".* One of the test cases involves sending a sample piece of meaningless text:\s*(.*?)\s* Write a Python program"
-    # Search for the pattern
-    match = re.search(pattern, question, re.DOTALL)
+    pattern = r'^[a-zA-Z0-9\s]{5,}$'
 
-    meaningless_text = match.group(1)
-    converted_text = meaningless_text.replace("\n", "\\n")
+    # Split the text into lines
+    lines = question.split('\n')
 
-    pattern1 = r'.* analyze the sentiment of this \(meaningless\) text into (.*?)(\.)'
+    # Extract lines that match the pattern
+    meaningless_lines = [line.strip() for line in lines if re.match(pattern, line.strip())]
 
-    # Search for the pattern
-    match1 = re.search(pattern1, question)
-    extracted_text = match1.group(1)
+    converted_text = '\\n'.join(meaningless_lines)
 
     payload = '''
     import httpx
@@ -25,7 +22,7 @@ def get_payload_request(question):
            headers={"Authorization":f"Bearer {api_key}"},
            json ={"model":"gpt-4o-mini",
                  "messages" :[
-                     {"role":"system","content":"Analyze the sentiment of the following text and categorize it as'''+extracted_text+'''."},
+                     {"role":"system","content":"Analyze the sentiment of the following text and categorize it as GOOD, BAD, or NEUTRAL."},
                      {"role":"user","content":"'''+converted_text+'''"}
                  ]
     

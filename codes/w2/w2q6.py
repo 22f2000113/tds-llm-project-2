@@ -13,4 +13,3 @@ def get_verl_url():
     print(response.status_code)
     return URL
 
-print(get_verl_url())

@@ -25,6 +25,10 @@ def read_file(file_path):
 def write_file(file_name, content, content_type ):
     """Writes content to a file."""
     mode ='w'
+    if isinstance(content, bytes):
+        # Convert bytes to string (assuming UTF-8 encoding)
+        content = content.decode('utf-8')
+
     if content_type == 'text/markdown':
         mode = 'wb'
     with open(file_name,mode) as file:

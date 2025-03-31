@@ -11,6 +11,10 @@
 #     "python-multipart",
 #     "google-auth",
 #     "google-auth-oauthlib",
+#     "beautifulsoup4",
+#     "lxml",
+#     "tabula-py",
+#
 # ]
 # ///
 
@@ -54,10 +58,10 @@ async def run_tasks(question: str = Form(...), file: Optional[UploadFile] = File
     try:
 
         api_que = search_similar(conn=conn,model=model,query=question)
-        print(api_que)
+        print(f"question is matching with {api_que}")
 
         if file:
-            file_path = os.path.join("./inputs", api_que)
+            file_path = current_dir+os.path.join("/inputs", api_que)
             print(f"file path {file_path}")
             os.makedirs(file_path, exist_ok=True)
             file_content = await file.read()
@@ -65,7 +69,7 @@ async def run_tasks(question: str = Form(...), file: Optional[UploadFile] = File
                 zip_file = BytesIO(file_content)
                 extract_zip_file(file_path, zip_file)
             else:
-                print(f"before writing to file {file.filename} {file.content_type}")
+                print(f"before writing to file {file.filename} {file.content_type} {file_path}")
                 file_path =file_path+f"/{file.filename}"
                 write_file(file_path,content=file_content, content_type=file.content_type)
                 print("file created successfully")

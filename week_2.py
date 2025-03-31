@@ -1,9 +1,10 @@
 
-from FileUtil import read_file
+from FileUtil import read_file,current_dir
 from codes.w2 import w2q3,w2q5,w2q6,w2q7
 
 def W2Q1(question):
-    return {"answer": read_file("./output/w2/ans1.txt")}
+    file_path = current_dir+"/output/w2/ans_w2_q1.txt"
+    return {"answer": read_file(file_path)}
 
 def W2Q3(question):
     return {"answer":w2q3.create_email_repo()}
