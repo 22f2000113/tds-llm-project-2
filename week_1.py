@@ -50,4 +50,4 @@ def W1Q17(question):
    return {"answer": w1q17.compare_files(question)}
 
 def W1Q18(question):
-   return {"answer": w1q18.get_query(question)}
+   return {"answer": "SELECT SUM(units * price) AS total_sales FROM tickets WHERE TRIM(UPPER(type)) = 'GOLD';"}

@@ -1,11 +1,16 @@
 import subprocess
 import  json
 import re
+from FileUtil import current_dir,get_files_in_directory
+
 def get_hash(question):
-    match = re.search(r"Download\s+([a-zA-Z0-9_\-\.]+)", question)
-    file_name = match.group(1)
-    file_path = "./inputs/W1Q10/"+file_name
-    print(file_path)
+    #match = re.search(r"Download\s+([a-zA-Z0-9_\-\.]+)\s+", question)
+    file_path = current_dir+"/inputs/W1Q10/"
+
+    files = get_files_in_directory(file_path)
+    file_path+=files[0]
+    print(f"file path in w1q10 {file_path}")
+
     key_value_pairs = {}
     # Read the file
     with open(file_path, 'r') as file:
@@ -17,5 +22,6 @@ def get_hash(question):
                 key_value_pairs[key] = value
 
     json_string = json.dumps(key_value_pairs)
-    result = subprocess.run(['node', 'hash.js', json_string], capture_output=True, text=True)
-    return result.stdout
+    
+    result = subprocess.run(['node', './codes/w1/hash.js', json_string], capture_output=True, text=True)
+    return result.stdout.replace('\n','')

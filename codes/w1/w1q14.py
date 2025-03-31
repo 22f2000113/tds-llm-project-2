@@ -1,6 +1,6 @@
 import re
 import subprocess
-
+import os
 # Input string
 def get_file_hash(question):
     # Regular expression to extract the string to replace and its replacement
@@ -16,6 +16,15 @@ def get_file_hash(question):
         print(f"String to replace: {string_to_replace}")
         print(f"Replacement string: {replacement_string}")
         # Run the bash script with the extracted strings as arguments
+        script_path = "w1q14.sh"
+        full_path = os.path.abspath(script_path)
+
+        print("Full path of the script:", full_path)
         result = subprocess.run(
-    ['bash', "w1q14.sh", string_to_replace, replacement_string, "./inputs/W1Q14"],capture_output=True, text=True)
+    ['bash', "./codes/w1/w1q14.sh", string_to_replace, replacement_string, "./inputs/W1Q14"],capture_output=True, text=True)
+        print(f"result of w1q14 question {result.stdout}")
+        print("Return code:", result.returncode)
+        print("stdout:", result.stdout)
+        print("stderr:", result.stderr)
+
         return result.stdout

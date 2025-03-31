@@ -20,4 +20,4 @@ def get_sha_code(question):
 
     # Print the result (SHA256 hash)
     print(result.stdout)
-    return result.stdout
+    return result.stdout.replace('\n','')
