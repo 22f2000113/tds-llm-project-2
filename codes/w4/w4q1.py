@@ -5,7 +5,7 @@ import re
 
 def get_command(question):
     page_number = re.search(r'page number (\d+)', question)
-    return_value=count_ducks_from_cricinfo(page_number)
+    return_value=count_ducks_from_cricinfo(page_number.group(1))
     print('get_command',return_value)
     return int(return_value)
 
@@ -36,5 +36,5 @@ def count_ducks_from_cricinfo(page_number=26):
 
     total_ducks = batting_table["0"].sum()
     print(f"Total number of ducks on page {page_number}: {total_ducks}")
-    return total_ducks
+    return str(total_ducks)
 

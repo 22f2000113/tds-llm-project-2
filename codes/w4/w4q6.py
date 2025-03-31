@@ -1,9 +1,15 @@
 import requests
 import xml.etree.ElementTree as ET
 import re
+import json
 
 def get_command(question):
-    return_value=get_latest_quantum_computing_post(52)
+    pattern = r'minimum of (\d+) points'
+    # Search for the pattern
+    match = re.search(pattern, question)
+
+    points = match.group(1)
+    return_value=get_latest_quantum_computing_post(points)
     return return_value
 
 
@@ -30,16 +36,8 @@ def get_latest_quantum_computing_post(min_points=52):
             points = int(match.group(1))
             print("title:", title, "| points:", points)
             if points >= min_points:
-                return {"title": title, "link": link, "points": points}
+                return link
 
     return None
 
 
-if __name__ == "__main__":
-    post = get_latest_quantum_computing_post()
-    if post:
-        print(f"Title: {post['title']}")
-        print(f"Link: {post['link']}")
-        print(f"Points: {post['points']}")
-    else:
-        print("No recent posts found with the specified criteria.")

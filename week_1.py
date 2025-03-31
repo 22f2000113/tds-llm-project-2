@@ -1,5 +1,5 @@
 from FileUtil import read_file
-from codes.w1 import w1q2,w1q3,w1q4,w1q5,w1q7,w1q8,w1q9,w1q10,w1q12,w1q13,w1q14,w1q16,w1q17,w1q18
+from codes.w1 import w1q2,w1q3,w1q4,w1q5,w1q7,w1q8,w1q9,w1q10,w1q12,w1q13,w1q14,w1q16,w1q17,w1q15
 
 def W1Q1(question):   
     return {"answer": read_file("./output/w1/ans1.txt")}
@@ -42,6 +42,9 @@ def W1Q13(question):
 
 def W1Q14(question):
    return {"answer": w1q14.get_file_hash(question)}
+
+def W1Q15(question):
+   return {"answer": w1q15.get_file_size(question)}
 
 def W1Q16(question):
    return {"answer": w1q16.get_file_move_and_hash(question)}

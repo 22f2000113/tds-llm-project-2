@@ -1,14 +1,21 @@
 import requests
+import re
 
 def get_command(question):
-    print(question)
-    city="Pune"
-    country="India"
+    pattern = r'What is the (maximum|minimum) latitude of the bounding box of the city ([A-Za-z\s]+) in the country ([A-Za-z\s]+) on the'
+
+    # Search for the pattern
+    match = re.search(pattern, question)
+
+    latitude_type = match.group(1)
+    city = match.group(2)
+    country = match.group(3)
     bounding_box =get_bounding_box(city,country)
     # Extract bounding box values (min lat, max lat, min lon, max lon)
-    max_latitude=get_max_latitude(bounding_box)
-    max_longitude = get_max_longitude(bounding_box)
-    return max_latitude, max_longitude
+    if latitude_type == 'maximum':
+        return str(get_max_latitude(bounding_box))
+    else:
+        return str(get_max_longitude(bounding_box))
 
 def get_max_latitude(bounding_box):
     max_latitude = float(bounding_box[1])  # Maximum latitude is the second value
@@ -56,14 +63,3 @@ def get_bounding_box(city, country):
         print(f"An error occurred: {e}")
         return None
 
-
-"""# Fetch max latitude for Addis Ababa, Ethiopia
-city = "Chengdu"
-country = "China"
-max_lat = get_max_latitude(city, country)
-
-# if max_lat is not None:
-print(f"Maximum latitude of the bounding box for {city}, {country}: {max_lat}")"""
-
-if __name__ == "__main__":
-    print(get_bounding_box("Pune", "India"))

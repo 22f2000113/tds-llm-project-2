@@ -1,13 +1,15 @@
 import requests
 import json
 from bs4 import BeautifulSoup
+import re
 
 def get_command(question):
-    location_id=get_location_id('Kuwait')
+    location = re.search(r'weather forecast for ([A-Za-z\s]+)', question)
+    location_id=get_location_id(location.group(1))
     print('location_id',location_id)
     return_value=get_weather_forecast(location_id)
     print("get_weather_forecast", return_value)
-    return return_value
+    return json.dumps(return_value)
 
 
 def get_weather_forecast(location_id):
@@ -68,6 +70,3 @@ def get_location_id(city_name):
     # Return the first matching locationId
     return locations[0]["id"]
 
-if __name__ == "__main__":
-    location_id_1=get_location_id("Kuwait")
-    get_weather_forecast(location_id_1)
