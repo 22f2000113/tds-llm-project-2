@@ -1,40 +1,24 @@
-# /// script
-# requires-python = ">=3.11"
-# dependencies = [
-#     "fastapi",
-#     "requests",
-#     "uvicorn",
-#     "duckdb",
-#     "numpy",
-#     "sentence-transformers",
-#     "pandas",
-#     "python-multipart",
-#     "google-auth",
-#     "google-auth-oauthlib",
-#     "beautifulsoup4",
-#     "lxml",
-#     "tabula-py",
-#
-# ]
-# ///
-
 from fastapi import FastAPI,  HTTPException, File, UploadFile, Form,Query
-import uvicorn
 from typing import List
 import os
 from typing import Optional
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from io import BytesIO
-from FileUtil import extract_zip_file, write_file
+from FileUtil import extract_zip_file, write_file,current_dir
 from QuestionDb import  init_db
 from QuestionDb import search_similar
+import requests
 from codes.w2 import w2q9
 from codes.w3 import w3q7,w3q8
 from models import SimilarityRequest
 from week_2 import *
 from week_1 import *
 from week_3 import *
+from week_4 import *
+from week_5 import *
+from bs4 import BeautifulSoup
+from fastapi.responses import PlainTextResponse
 app = FastAPI()
 
 
@@ -99,6 +83,29 @@ async def execute(q: str):
         return result
     except HTTPException as e:
         raise e
+        
+@app.get("/api/outline", response_class=PlainTextResponse)
+def get_country_outline(country: str = Query(..., description="Name of the country")):
+    # 1. Fetch Wikipedia URL
+    wiki_url = f"https://en.wikipedia.org/wiki/{country.replace(' ', '_')}"
+    response = requests.get(wiki_url)
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    if response.status_code != 200:
+        return f"Error: Wikipedia page not found for '{country}'."
+
+    # 2. Parse the HTML content
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    # 3. Extract headings from H1 to H6
+    heading_tags = ["h1", "h2", "h3", "h4", "h5", "h6"]
+    headings = soup.find_all(heading_tags)
+
+    # 4. Format into Markdown outline
+    outline_lines = ["## Contents"]
+    for tag in headings:
+        level = int(tag.name[1])  # Extract heading level from h1, h2, ...
+        text = tag.get_text().strip()
+        if text:
+            outline_lines.append(f"{'#' * level} {text}")
+
+    return "\n".join(outline_lines)
